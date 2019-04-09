@@ -4,6 +4,7 @@ const REDIS_SENTINELS_CONNECTION_STRING = process.env.REDIS_SENTINELS_CONNECTION
   process.env.REDIS_SENTINELS_CONNECTION_STRING :
   '[{"host":"localhost","port":26380},{"host":"localhost","port":26381},{"host":"localhost","port":26382}]'
 const REDIS_SENTINELS = JSON.parse(REDIS_SENTINELS_CONNECTION_STRING)
+const REDIS_CONNECTION_RETRY_MS = 10000
 const Redis = require('ioredis')
 
 console.debug("Redis sentinels:")
@@ -11,7 +12,10 @@ console.debug(REDIS_SENTINELS)
 
 var redis = new Redis({
   sentinels: REDIS_SENTINELS,
-  name: 'mymaster'
+  name: 'mymaster',
+  sentinelRetryStrategy: () => {
+    return REDIS_CONNECTION_RETRY_MS
+  }
 });
 
 const randomIdGenerator = () => {
