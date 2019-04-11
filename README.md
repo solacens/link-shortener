@@ -22,6 +22,7 @@ sh ./deploy.sh
 
 ```sh
 # Dev
+yarn # Get dependencies
 node main.js # Connects Redis HA with sentinel locally
 
 # Build and push image
