@@ -18,7 +18,7 @@ sh ./deploy.sh
 ```
 
 ---
-### Dev/Build/Deploy
+## Dev/Build/Deploy
 
 ```sh
 # Dev
@@ -28,3 +28,12 @@ node main.js # Connects Redis HA with sentinel locally
 # Build and push image
 sh build.sh
 ```
+
+---
+## Environment Variables
+
+| Name          | Required | Default Value           | Description                                                     |
+|---------------|----------|-------------------------|-----------------------------------------------------------------|
+| EXPRESS_PORT  | No       | 8080                    | Port that express runs on                                       |
+| DOMAIN        | No       | localhost:$EXPRESS_PORT | Slack webhook URL                                               |
+| HTTPS_ENABLED | No       | (none)                  | The returned domain URL will be in https if the value is truthy |
